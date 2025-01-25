@@ -1,3 +1,4 @@
+import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
@@ -12,9 +13,13 @@ def train_model(data):
     # Split data into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # Train a RandomForestClassifier
-    model = RandomForestClassifier(random_state=42)
+    # Train a RandomForestClassifier with hyperparameter tuning
+    model = RandomForestClassifier(n_estimators=150, max_depth=10, random_state=42)
     model.fit(X_train, y_train)
+
+    # Save the trained model
+    joblib.dump(model, "iris_model.pkl")
+    print("Model saved as 'iris_model.pkl'.")
 
     # Evaluate the model
     predictions = model.predict(X_test)
