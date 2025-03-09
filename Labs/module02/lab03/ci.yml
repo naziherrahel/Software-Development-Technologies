@@ -1,0 +1,48 @@
+name: CI Pipeline
+
+permissions:
+  contents: write  # Allow write access to the repository contents
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      
+      - name: Train Model
+        run: python src/model.py
+      
+      - name: Run tests
+        run: pytest src/test_model.py
+
+      - name: Ensure docs directory exists
+        run: mkdir -p docs
+
+      - name: Update HTML Report
+        run: |
+          # Extract the accuracy metric from metrics.txt
+          accuracy=$(grep 'Accuracy' docs/metrics.txt | cut -d' ' -f2)
+          echo "Updating HTML report with Accuracy: $accuracy"
+          # Replace the placeholder {{accuracy}} in the existing index.html file
+          sed -i "s/{{accuracy}}/$accuracy/g" docs/index.html
+
+      - name: Publish HTML Report
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update report with latest metrics"
+          branch: main
+          file_pattern: docs/index.html docs/confusion_matrix.png docs/metrics.txt
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
