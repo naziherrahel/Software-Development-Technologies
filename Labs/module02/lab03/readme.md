@@ -33,6 +33,7 @@ After completing this lab, you will be able to:
 
 Your final project should have a structure similar to this:
 
+```
 ai-lab-gh-actions/
 ├── .github/
 │   └── workflows/
@@ -45,7 +46,7 @@ ai-lab-gh-actions/
 │   └── test_model.py    # Tests to verify model performance
 ├── requirements.txt     # Project dependencies
 └── assets/              # (Optional) Folder for intermediate output files
-
+```
 
 *Note:* The `docs` folder is used by GitHub Pages to serve your live report.
 
@@ -98,65 +99,74 @@ Please use the following links as your source code reference. Click each link to
    git init
    git add .
    git commit -m "Initial commit for Lab 03"
-
-```
+    ```
 Create a New Repository on GitHub:
 
 Create a new repository under your GitHub account.
 Add the Remote and Push Your Changes:
 
-    ```bash
+    ```
     git remote add origin https://github.com/<your-username>/<your-repo-name>.git
     git push -u origin main 
-
+    ```
 Important: You must push your local project to your own GitHub repository. The repository in this lab is only for reference.
 
 ### 3. Configure GitHub Actions and GitHub Pages
 
-GitHub Actions:
+**GitHub Actions:**
 
-Once you push your repository, GitHub Actions will trigger the CI pipeline defined in .github/workflows/ci.yml.
-Check the Actions tab in your repository to ensure the pipeline runs successfully. This pipeline trains the model, runs tests, updates the HTML report, and commits the changes.
+- Once you push your repository, GitHub Actions will trigger the CI pipeline defined in ```.github/workflows/ci.yml.```
+- Check the Actions tab in your repository to ensure the pipeline runs successfully. 
+This pipeline:
+
+- trains the model. 
+- runs tests. 
+- updates the HTML report.
+- Commits the changes automatically.
 
 **GitHub Pages:**
 
-In your GitHub repository, go to Settings > Pages.
-Under Source, select the main branch and set the folder to /docs.
-Save your settings.
-Your live report will be available at:
+1. In your GitHub repository, go to **Settings > Pages**.
+2. Under **Source**, select the ``main`` branch and set the folder to 
+```/docs```.
+3. Save your settings.
+4. Your live report will be available at:
 
-    ```bash 
+    ```
     https://<your-username>.github.io/<your-repo-name>/
+    ```
 
 **Lab Submission** 
 
 Submit a document that includes:
 
-Your GitHub Repository URL:
-The URL of your repository where your Lab 03 project is hosted.
-Screenshots:
-A screenshot of a successful GitHub Actions run (from the Actions tab).
-A screenshot of your live GitHub Pages site.
-Documentation:
-A brief explanation of your project structure.
-A description of how you set up GitHub Actions and GitHub Pages.
-Any challenges you encountered and how you resolved them.
-Final Notes
-Manual Setup:
-Use the file links above as your code source. Copy the contents from each file link into the corresponding file in your local project.
+1. **Your GitHub Repository URL:**
 
-Industry Standards:
-This lab simulates real-world CI/CD pipelines and automated deployment practices for AI projects.
+- The URL of your repository where your Lab 03 project is hosted.
 
-Assistance:
-If you encounter any issues, refer to this README or contact your instructor for help.
+2. **Screenshots:**
+- A screenshot of a successful **GitHub Actions run** (from the Actions tab).
+- A screenshot of your live GitHub Pages site.
 
-Happy coding and good luck with Lab 03!
+3. **Documentation:**
 
+- A brief explanation of your project structure.
+- A description of how you set up GitHub Actions and GitHub Pages.
+- Any challenges you encountered and how you resolved them.
 
+### Final Notes
 
----
+**Manual Setup:**
 
-This `README.md` file provides all the lab instructions and links to the code files. Students can cl
+- Use the file links above as your code source. Copy the contents from each file link into the corresponding file in your local project.
 
-```
+**Industry Standards:**
+
+- This lab simulates real-world **CI/CD pipelines** and automated deployment practices for AI projects.
+
+**Assistance:**
+
+- If you encounter any issues, refer to this **README** or contact your instructor for help.
+
+🎯 Happy coding and good luck with Lab 03! Best, Nazih Errahel 🚀
+
