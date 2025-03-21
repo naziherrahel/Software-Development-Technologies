@@ -5,15 +5,24 @@ from datetime import datetime, date
 from math import radians
 
 # +
-def card_owner_age(trans_df, profiles_df):
-    trans_df = trans_df.merge(profiles_df[['cc_num', 'birthdate']], on='cc_num', how='left')
+def card_owner_age(trans_df: pd.DataFrame, profiles_df: pd.DataFrame) -> pd.DataFrame:
+    """Calculate age at transaction time using transaction datetime."""
+    # Merge the birthdate information
+    trans_df = trans_df.merge(
+        profiles_df[['cc_num', 'birthdate']], 
+        on='cc_num', 
+        how='left'
+    )
     
-    # Convert 'birth_date' to datetime if not already
-    trans_df['birthdate'] = pd.to_datetime(trans_df['birthdate'])
+    # Convert to datetime objects
+    trans_df['datetime'] = pd.to_datetime(trans_df['datetime'])
+    trans_df['birthdate'] = pd.to_datetime(trans_df['birthdate'], errors='coerce')
     
-    # Calculate age in years more accurately
-    trans_df['age'] = (pd.Timestamp.now() - trans_df['birthdate']).dt.days / 365.25  # Use 365.25 to account for leap years
-
+    # Calculate age at time of transaction
+    trans_df["age_at_transaction"] = (
+        (trans_df['datetime'] - trans_df['birthdate']).dt.days / 365.25
+    )
+    
     return trans_df
 
 
