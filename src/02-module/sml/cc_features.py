@@ -6,13 +6,13 @@ from math import radians
 
 # +
 def card_owner_age(trans_df, profiles_df):
-    trans_df = trans_df.merge(profiles_df[['cc_num', 'birth_date']], on='cc_num', how='left')
+    trans_df = trans_df.merge(profiles_df[['cc_num', 'birthdate']], on='cc_num', how='left')
     
     # Convert 'birth_date' to datetime if not already
-    trans_df['birth_date'] = pd.to_datetime(trans_df['birth_date'])
+    trans_df['birthdate'] = pd.to_datetime(trans_df['birthdate'])
     
     # Calculate age in years more accurately
-    trans_df['age'] = (pd.Timestamp.now() - trans_df['birth_date']).dt.days / 365.25  # Use 365.25 to account for leap years
+    trans_df['age'] = (pd.Timestamp.now() - trans_df['birthdate']).dt.days / 365.25  # Use 365.25 to account for leap years
 
     return trans_df
 
