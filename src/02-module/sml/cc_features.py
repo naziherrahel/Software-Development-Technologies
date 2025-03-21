@@ -5,13 +5,17 @@ from datetime import datetime, date
 from math import radians
 
 # +
-def card_owner_age(trans_df : pd.DataFrame, profiles_df : pd.DataFrame)-> pd.DataFrame:
-    """Used only in feature pipelines (not online inference). 
-       Unit test with DataFrames and sample data.
-    """
-    age_df = trans_df.merge(profiles_df, on="cc_num", how="left")
-    trans_df["age_at_transaction"] = (age_df["datetime"] - age_df["birthdate"]) / np.timedelta64(1, "Y")
+def card_owner_age(trans_df, profiles_df):
+    trans_df = trans_df.merge(profiles_df[['cc_num', 'birth_date']], on='cc_num', how='left')
+    
+    # Convert 'birth_date' to datetime if not already
+    trans_df['birth_date'] = pd.to_datetime(trans_df['birth_date'])
+    
+    # Calculate age in years more accurately
+    trans_df['age'] = (pd.Timestamp.now() - trans_df['birth_date']).dt.days / 365.25  # Use 365.25 to account for leap years
+
     return trans_df
+
 
 def expiry_days(trans_df : pd.DataFrame, credit_cards_df : pd.DataFrame)-> pd.DataFrame:
     """Used only in feature pipelines (not online inference). 
