@@ -3,7 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-*.nbconvert.ipynb
 *~
 
 .hw_api_key
