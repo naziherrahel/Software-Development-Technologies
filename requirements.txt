@@ -1,3 +1,4 @@
+pandas
 confluent_kafka
 faker
 parsedatetime
