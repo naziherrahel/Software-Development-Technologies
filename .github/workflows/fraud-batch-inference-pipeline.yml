@@ -25,5 +25,6 @@ jobs:
       - name: execute python workflows from bash script
         env: 
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
-        run: ./src/03-module/scripts/run-fraud-batch-inference.sh
+        run: ./src/02-module/scripts/run-fraud-feature-pipelines.sh
+        
 
