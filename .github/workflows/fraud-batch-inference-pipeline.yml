@@ -22,6 +22,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
+      - name: install jupyter and ipykernel
+        run: |
+          pip install jupyter
+          pip install ipykernel
+          python -m ipykernel install --user
+
       - name: ensure script has execute permission
         run: chmod +x ./src/02-module/scripts/run-fraud-feature-pipelines.sh
 
